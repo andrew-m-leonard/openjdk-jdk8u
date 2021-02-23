@@ -455,6 +455,7 @@ define SetupNativeCompilation
             # The dependency on TARGET is needed on windows for debuginfo files
             # to be rebuilt properly.
             $$($1_OUTPUT_DIR)/% : $$($1_OBJECT_DIR)/% $$($1_TARGET)
+		echo "====> $(CP) $$< $$@"
 		$(CP) $$< $$@
           endif
         endif
