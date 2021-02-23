@@ -539,6 +539,7 @@ define SetupNativeCompilation
 
     $$($1_TARGET) : $$($1_EXPECTED_OBJS) $$($1_RES) $$($1_REAL_MAPFILE)
 	$$(call LINKING_MSG,$$($1_BASENAME))
+	echo "===>" $$($1_LD) $$($1_LDFLAGS) $$($1_EXTRA_LDFLAGS) $(LD_OUT_OPTION)$$@ $$($1_EXPECTED_OBJS) $$($1_RES) $$($1_LDFLAGS_SUFFIX) $$($1_EXTRA_LDFLAGS_SUFFIX)
 	$$($1_LD) $$($1_LDFLAGS) $$($1_EXTRA_LDFLAGS) $(LD_OUT_OPTION)$$@ \
 	$$($1_EXPECTED_OBJS) $$($1_RES) $$($1_LDFLAGS_SUFFIX) \
 	$$($1_EXTRA_LDFLAGS_SUFFIX)
