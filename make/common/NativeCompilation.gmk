@@ -440,6 +440,8 @@ define SetupNativeCompilation
   ifeq ($$($1_STATIC_LIBRARY),)
     ifneq ($$($1_DEBUG_SYMBOLS),)
       ifeq ($(ENABLE_DEBUG_SYMBOLS), true)
+  _JUNK_ := $(shell \
+    echo >&2 "INFO: ===> ENABLE_DEBUG_SYMBOLS=$(ENABLE_DEBUG_SYMBOLS)")
         ifneq ($$($1_OUTPUT_DIR),$$($1_OBJECT_DIR))
           ifeq ($(OPENJDK_TARGET_OS), macosx)
             # MacOS debug symbols are in %.dSYM directories
@@ -459,11 +461,16 @@ define SetupNativeCompilation
 
         # Generate debuginfo files.
         ifeq ($(OPENJDK_TARGET_OS), windows)
+  _JUNK_ := $(shell \
+    echo >&2 "INFO: ===> windows generate debuginfo...")
           ifneq ($$($1_STRIP_POLICY), no_strip)
             $1_EXTRA_LDFLAGS += "-pdb:$$($1_OBJECT_DIR)/$$($1_NOSUFFIX).pdb" \
               "-map:$$($1_OBJECT_DIR)/$$($1_NOSUFFIX).map"
             $1_DEBUGINFO_FILES := $$($1_OBJECT_DIR)/$$($1_NOSUFFIX).pdb \
               $$($1_OBJECT_DIR)/$$($1_NOSUFFIX).map
+
+  _JUNK_ := $(shell \
+    echo >&2 "INFO: ===> extra_ldflags=$1_EXTRA_LDFLAGS")
 
             # This dependency dance ensures that windows debug info files get rebuilt
             # properly if deleted.
